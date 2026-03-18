@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrayRescue - Saving Lives, One Paw at a Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <nav class="main-nav">
+                <a href="#" class="logo">
+                    <span>StrayRescue</span>
+                </a>
+                <div class="nav-actions">
+                    <div class="dropdown">
+                        <button class="dropdown-toggle">
+                            <i class="fas fa-users"></i> {{ getRoleContent().roleText }} <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" (click)="changeRole('volunteer')">Volunteer</a>
+                            <a class="dropdown-item" (click)="changeRole('admin')">Admin</a>
+                            <a class="dropdown-item" (click)="changeRole('user')">User</a>
+                        </div>  
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="tagline"><i class="fas fa-heart"></i> Real-time Animal Rescue Platform</span>
+                    <h1>Saving Lives, <span>One Paw</span> at a Time</h1>
+                    <p>Connect with compassionate volunteers and dedicated admins to rescue, care for, and find homes for stray animals in your community.</p>
+                    <div class="hero-buttons">            
+                        <a [routerLink]="['/register', selectedRole]" class="btn btn-primary">{{ getRoleContent().buttonText }} <i class="fas fa-arrow-right"></i></a>
+                        <a [routerLink]="['/signin', selectedRole]" class="btn btn-secondary">{{ getRoleContent().signInText }}</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <p class="stat-number">1,500+</p>
+                            <p class="stat-label">Animals Rescued</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-number">300+</p>
+                            <p class="stat-label">Active Volunteers</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-number">50+</p>
+                            <p class="stat-label">Partner Shelters</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-number">24/7</p>
+                            <p class="stat-label">Emergency Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="difference-section">
+            <div class="container">
+                <h2>How We Make a Difference</h2>
+                <p class="section-subtitle">Our platform connects caring individuals with stray animals in need of help.</p>
+                <div class="difference-cards">
+                    <div *ngIf="selectedRole === 'volunteer'" class="card">
+                        <div class="card-icon volunteer-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3>For Volunteers</h3>
+                        <p>Join our community of compassionate individuals dedicated to rescuing and caring for stray animals.</p>
+                        <ul>
+                            <li>Report stray animals in need</li>
+                            <li>Coordinate rescue efforts</li>
+                            <li>Foster animals temporarily</li>
+                            <li>Help with medical care and adoption</li>
+                        </ul>
+                    </div>
+                    <div *ngIf="selectedRole === 'admin'" class="card">
+                        <div class="card-icon admin-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>For Administrators</h3>
+                        <p>Manage rescue operations and coordinate with volunteers to ensure efficient animal care.</p>
+                        <ul>
+                            <li>Oversee rescue operations</li>
+                            <li>Manage volunteer assignments</li>
+                            <li>Track animal health records</li>
+                            <li>Coordinate with veterinarians</li>
+                        </ul>
+                    </div>
+                    <div *ngIf="selectedRole === 'user'" class="card">
+                        <div class="card-icon volunteer-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <h3>For Users</h3>
+                        <p>Explore our platform and contribute to rescuing animals in need.</p>
+                        <ul>
+                            <li>Search for adoptable animals</li>
+                            <li>Donate to animal rescue efforts</li>
+                            <li>Spread awareness on social media</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <h2>About StrayRescue</h2>
+                <p class="section-subtitle">
+                    StrayRescue is a comprehensive, real-time platform designed to streamline the animal rescue process. Our main features include instant reporting of animals in distress via a mobile-friendly interface, efficient coordination of volunteers based on location and availability, and transparent tracking of each rescue case from report to resolution. We empower communities to act quickly and effectively, ensuring that every animal gets the chance for a safe and loving home.
+                </p>
+            </div>
+        </section>
+
+        <section class="how-it-works-section">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="works-steps">
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-bullhorn"></i></div>
+                        <h4>1. Report Animal</h4>
+                        <p>Submit a report with location and details of an animal in need.</p>
+                    </div>
+                    <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-user-check"></i></div>
+                        <h4>2. Volunteer Assigned</h4>
+                        <p>The nearest available volunteer is notified and assigned to the case.</p>
+                    </div>
+                    <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-shipping-fast"></i></div>
+                        <h4>3. Rescue in Progress</h4>
+                        <p>The volunteer provides real-time updates as they rescue the animal.</p>
+                    </div>
+                    <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-heart"></i></div>
+                        <h4>4. Rescue Completed</h4>
+                        <p>The animal is safely secured and transported for care.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 StrayRescue. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

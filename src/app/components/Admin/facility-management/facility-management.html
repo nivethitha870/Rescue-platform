@@ -1,0 +1,50 @@
+<div class="facility-container">
+  <h1>Facility Management</h1>
+  <p>Add new veterinary clinics, shelters, or Blue Cross stations to the platform.</p>
+
+  <div class="form-card card">
+    <h2>Add New Facility</h2>
+    <form [formGroup]="facilityForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Facility Name -->
+      <div class="form-group">
+        <label for="name">Facility Name</label>
+        <input type="text" id="name" formControlName="name" placeholder="e.g., City Veterinary Hospital">
+      </div>
+
+      <!-- Facility Type -->
+      <div class="form-group">
+        <label for="type">Facility Type</label>
+        <select id="type" formControlName="type">
+          <option value="" disabled>Select a type...</option>
+          <option value="Veterinary Clinic">Veterinary Clinic</option>
+          <option value="Shelter">Shelter</option>
+          <option value="Blue Cross">Blue Cross</option>
+        </select>
+      </div>
+
+      <!-- Map Selector for Location -->
+      <div class="form-group">
+        <label>Pinpoint Location on Map</label>
+        <p class="form-hint">Click on the map to place a marker at the facility's location.</p>
+        <app-map-selector (locationSelected)="onLocationSelected($event)"></app-map-selector>
+      </div>
+
+      <!-- Address (auto-filled for now) -->
+      <div class="form-group">
+        <label for="address">Address / Location Details</label>
+        <input type="text" id="address" formControlName="address" readonly>
+      </div>
+
+      <!-- Messages -->
+      <div *ngIf="successMessage" class="message success">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="message error">{{ errorMessage }}</div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit" [disabled]="facilityForm.invalid || isSubmitting">
+        {{ isSubmitting ? 'Adding...' : 'Add Facility' }}
+      </button>
+
+    </form>
+  </div>
+</div>

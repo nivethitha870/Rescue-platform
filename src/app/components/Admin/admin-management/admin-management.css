@@ -1,0 +1,227 @@
+.management-container {
+  color: #e0e0e0;
+}
+
+.management-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.management-container p {
+  color: #a0a0a0;
+  margin-bottom: 2.5rem;
+}
+
+/* Base card style for the table container */
+.table-container.card {
+  background-color: #1c233a;
+  border: 1px solid #2a324b;
+  border-radius: 12px;
+  padding: 0; /* Remove padding to let the table control its spacing */
+  overflow: hidden; /* Important for rounded corners on the table */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Removes space between table cells */
+}
+
+thead {
+  background-color: #bdeef3;
+}
+
+th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  color: #ffffff;
+  border-bottom: 2px solid #3f8ff0;
+}
+
+tbody tr {
+  border-bottom: 1px solid #2a324b;
+  transition: background-color 0.2s ease-in-out;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: #2a324b;
+}
+
+td {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+}
+
+/* Status Badge Styling */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.status-badge.reported { background-color: #ffc107; color: #121829; }
+.status-badge.in-progress { background-color: #3f8ff0; }
+.status-badge.resolved { background-color: #28a745; }
+.status-badge.closed { background-color: #6c757d; }
+
+/* Action Buttons in Table */
+.btn-action {
+  background-color: #4a557e;
+  border: none;
+  color: #e0e0e0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-action:hover {
+  background-color: #5a67d8;
+  color: #ffffff;
+}
+
+/* =================================
+   Modal Styles
+   ================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #1c233a;
+    border: 1px solid #2a324b;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-content.animated {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #2a324b;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.close-btn {
+    background: none; border: none; font-size: 2rem;
+    color: #a0a0a0; cursor: pointer;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.image-section {
+    margin-bottom: 2rem;
+}
+
+.image-section h3 {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+.image-section img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: #121829;
+}
+
+.details-section h3 {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+.details-section p {
+    color: #c0c0c0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.management-container h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.5rem;
+    color: #2c5f7c;
+    margin-bottom: 0.5rem;
+}
+.management-container p {
+    color: #5a7c8f;
+    margin-bottom: 2.5rem;
+}
+
+.table-container.card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+table { width: 100%; border-collapse: collapse; }
+thead { border-bottom: 2px solid rgba(130, 205, 224, 0.5); }
+th { padding: 1rem 1.5rem; text-align: left; font-weight: 600; color: #2c5f7c; }
+tbody tr { border-bottom: 1px solid rgba(130, 205, 224, 0.2); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background-color: rgba(130, 205, 224, 0.1); }
+td { padding: 1rem 1.5rem; vertical-align: middle; color: #5a7c8f; }
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+}
+.status-badge.reported { background-color: #ffc107; color: #333; }
+.status-badge.in-progress { background-color: #82cde0; }
+.status-badge.resolved { background-color: #28a745; }
+.status-badge.closed { background-color: #8A817C; }
+
+.btn-action {
+    background: rgba(130, 205, 224, 0.2);
+    border: 1px solid rgba(130, 205, 224, 0.4);
+    color: #2c5f7c;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-action:hover { background: #82cde0; color: #fff; }

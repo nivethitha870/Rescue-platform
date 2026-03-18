@@ -1,0 +1,83 @@
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #34495E;
+    margin-bottom: 2rem;
+}
+
+/* Base card style using the glassmorphism effect */
+.card {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-card h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #7590B3;
+    margin: 0 0 0.5rem 0;
+}
+
+.stat-card p {
+    font-size: 1rem;
+    color: #5D6D7E;
+    margin: 0;
+}
+
+.ongoing-case-status {
+    margin-top: 2rem;
+}
+
+.ongoing-case-status h2 {
+    font-size: 1.75rem;
+    color: #34495E;
+    margin-bottom: 1.5rem;
+}
+
+.case-details {
+    padding: 1.5rem;
+}
+.case-details p {
+    margin: 0.75rem 0;
+    font-size: 1rem;
+    color: #34495E;
+}
+.case-details strong {
+    color: #5D6D7E;
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background-color: rgba(117, 144, 179, 0.2);
+    color: #34495E;
+}
+
+.ongoing-cases-section .case-details.card {
+margin-bottom: 1.5rem;
+}
+
+.empty-state {
+text-align: center;
+color: #5D6D7E;
+font-style: italic;
+}

@@ -1,0 +1,149 @@
+<div class="dashboard-container">
+  <h1>Volunteer Dashboard</h1>
+
+  <!-- Live Map for both active and available cases -->
+  <div class="map-container card">
+    <h2>Live Case Map</h2>
+    <!-- Display a message if there are no cases at all -->
+    <p *ngIf="allMapCases.length === 0" class="empty-state">No cases to display on the map.</p>
+    <!-- We bind the pre-combined 'allMapCases' array to the map -->
+    <app-case-map *ngIf="allMapCases.length > 0" [cases]="allMapCases"></app-case-map>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-card card">
+      <div class="stat-number">{{ resolvedCasesCount }}</div>
+      <div class="stat-label">Resolved Cases</div>
+    </div>
+    <div class="stat-card card">
+      <div class="stat-number">{{ activeCases.length }}</div>
+      <div class="stat-label">My Active Cases</div>
+    </div>
+  </div>
+
+  <!-- My Active Cases List -->
+ <!-- MY ACTIVE CASES LIST (UPDATED) -->
+  <div class="case-section">
+    <h2>My Active Cases</h2>
+    <div *ngIf="activeCases.length > 0; else noActiveCases">
+      <div class="case-card card" *ngFor="let case of activeCases">
+        <h3>{{ case.animal }} - <span class="case-type">{{ case.caseType }}</span></h3>
+        <p><strong>Location:</strong> {{ case.address }}</p>
+        <p><strong>Reported:</strong> {{ case.createdAt | date:'medium' }}</p>
+
+        <div class="map-view-container" *ngIf="expandedCaseId === case._id">
+          <app-single-case-map [case]="case"></app-single-case-map>
+        </div>
+
+        <div class="modal-actions">
+          <!-- THE FIX: New "View Image" button -->
+          <button class="btn btn-secondary" (click)="openImageViewer(case)">
+            <i class="fas fa-image"></i> View Image
+          </button>
+          <button class="btn btn-secondary" (click)="toggleCaseMap(case._id)">
+            <i class="fas fa-map-marker-alt"></i> {{ expandedCaseId === case._id ? 'Hide Map' : 'View on Map' }}
+          </button>
+          <button class="btn btn-resolve" (click)="openResolveModal(case)">Mark as Resolved</button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noActiveCases>
+      <div class="empty-state card">You have no active cases assigned.</div>
+    </ng-template>
+  </div>
+
+  <!-- AVAILABLE CASES SECTION (UPDATED) -->
+  <div class="case-section">
+    <h2>Available Cases</h2>
+    <div *ngIf="availableCases.length > 0; else noAvailableCases">
+      <div class="case-card card" *ngFor="let case of availableCases">
+        <h3>{{ case.animal }} - <span class="case-type">{{ case.caseType }}</span></h3>
+        <p><strong>Location:</strong> {{ case.address }}</p>
+        <p><strong>Reported:</strong> {{ case.createdAt | date:'medium' }}</p>
+
+        <div class="map-view-container" *ngIf="expandedCaseId === case._id">
+          <app-single-case-map [case]="case"></app-single-case-map>
+        </div>
+
+        <div class="modal-actions">
+          <!-- THE FIX: New "View Image" button -->
+          <button class="btn btn-secondary" (click)="openImageViewer(case)">
+            <i class="fas fa-image"></i> View Image
+          </button>
+          <button class="btn btn-secondary" (click)="toggleCaseMap(case._id)">
+            <i class="fas fa-map-marker-alt"></i> {{ expandedCaseId === case._id ? 'Hide Map' : 'View on Map' }}
+          </button>
+          <div class="accept-decline-group">
+            <button class="btn btn-decline" (click)="availableCases.splice(availableCases.indexOf(case), 1)">Decline</button>
+            <button class="btn btn-accept" (click)="onAcceptCase(case._id)">Accept</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noAvailableCases>
+      <div class="empty-state card">No new cases are available right now. Check back soon!</div>
+    </ng-template>
+  </div>
+</div>
+
+
+<!-- ======================= -->
+<!-- MODALS (Hidden by default) -->
+<!-- ======================= -->
+
+<!-- NEW CASE NOTIFICATION MODAL -->
+<div class="modal-overlay" *ngIf="isNewCaseModalVisible">
+  <div class="modal-content card animated">
+    <div class="modal-header">
+      <h2><i class="fas fa-bell"></i> New Case Reported!</h2>
+      <button class="close-btn" (click)="onDeclineFromModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-map-container" *ngIf="newCaseToShow">
+        <app-single-case-map [case]="newCaseToShow"></app-single-case-map>
+      </div>
+      <div class="case-details">
+        <div><strong>Animal:</strong> {{ newCaseToShow?.animal }}</div>
+        <div><strong>Type:</strong> {{ newCaseToShow?.caseType }}</div>
+        <div><strong>Location:</strong> {{ newCaseToShow?.address }}</div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-decline" (click)="onDeclineFromModal()">Decline</button>
+      <button class="btn btn-accept" (click)="onAcceptCase(newCaseToShow._id)">Accept Case</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESOLVE CASE MODAL -->
+<div class="modal-overlay" *ngIf="isResolveModalVisible">
+  <div class="modal-content card animated">
+    <div class="modal-header">
+      <h2>Resolve Case: {{ caseToResolve?.animal }}</h2>
+      <button class="close-btn" (click)="isResolveModalVisible = false">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Upload a clear photo as proof of successful resolution.</p>
+      <app-image-uploader (imageSelected)="onProofImageSelected($event)"></app-image-uploader>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" (click)="isResolveModalVisible = false">Cancel</button>
+      <button class="btn btn-resolve" (click)="onResolveSubmit()" [disabled]="!resolutionProofBase64 || isSubmittingResolution">
+        {{ isSubmittingResolution ? 'Submitting...' : 'Submit Resolution' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isImageViewerVisible" (click)="closeImageViewer()">
+  <div class="modal-content image-viewer card animated" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ imageCaseDetails }}</h2>
+      <button class="close-btn" (click)="closeImageViewer()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <img [src]="imageToShow" alt="Case Image" class="case-image-full">
+    </div>
+  </div>
+</div>

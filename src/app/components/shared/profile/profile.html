@@ -1,0 +1,84 @@
+<div class="profile-container">
+  <h1>Your Profile</h1>
+
+  <div class="card profile-card" *ngIf="user; else loading">
+    <!-- Read-Only View -->
+    <div *ngIf="!isEditing">
+      <div class="detail-group">
+        <label>Full Name</label>
+        <p>{{ user.fullName }}</p>
+      </div>
+      <div class="detail-group">
+        <label>Email Address</label>
+        <p>{{ user.email }}</p>
+      </div>
+      <div class="detail-group">
+        <label>Mobile Number</label>
+        <p>{{ user.mobileNumber }}</p>
+      </div>
+      <div class="detail-group">
+        <label>Role</label>
+        <p class="role-badge">{{ user.role }}</p>
+      </div>
+      <button class="btn btn-primary" (click)="toggleEdit()">Edit Profile</button>
+    </div>
+
+    <!-- Editing View -->
+    <div *ngIf="isEditing">
+      <form [formGroup]="profileForm" (ngSubmit)="onUpdate()">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" formControlName="fullName">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="mobileNumber">Mobile Number</label>
+          <input type="text" id="mobileNumber" formControlName="mobileNumber">
+        </div>
+        <div class="button-group">
+          <button type="button" class="btn btn-secondary" (click)="toggleEdit(true)">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Save Changes</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Messages -->
+    <div *ngIf="successMessage" class="message success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="message error">{{ errorMessage }}</div>
+  </div>
+
+  <!-- Delete Account Section (UPDATED) -->
+  <div class="card delete-card" *ngIf="user">
+    <h2>Delete Account</h2>
+    <p>Once you delete your account, there is no going back. Please be certain.</p>
+    <!-- This button now opens the modal -->
+    <button class="btn btn-danger" (click)="openDeleteModal()">Delete My Account</button>
+  </div>
+  
+  <ng-template #loading><p>Loading profile...</p></ng-template>
+</div>
+
+<!-- THE FIX: New Modal for Delete Confirmation -->
+<div class="modal-overlay" *ngIf="isDeleteModalVisible">
+  <div class="modal-content card animated">
+    <div class="modal-header">
+      <h2>Are you sure?</h2>
+    </div>
+    <div class="modal-body">
+      <p>This action is irreversible. All your data, including reported cases and history, will be permanently deleted.</p>
+      <p>Please confirm that you want to proceed.</p>
+      
+      <!-- Display any error messages from the backend inside the modal -->
+      <div *ngIf="errorMessage" class="message error">{{ errorMessage }}</div>
+    </div>
+    <div class="modal-actions">
+      <!-- Cancel button just closes the modal -->
+      <button class="btn btn-secondary" (click)="isDeleteModalVisible = false">Cancel</button>
+      <!-- The confirm button calls the final delete method -->
+      <button class="btn btn-danger" (click)="confirmDelete()">Yes, Delete My Account</button>
+    </div>
+  </div>
+</div>

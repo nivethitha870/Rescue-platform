@@ -1,0 +1,120 @@
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #34495E;
+    margin-bottom: 0.5rem;
+}
+p {
+    color: #5D6D7E;
+    margin-bottom: 2.5rem;
+}
+
+/* THE FIX: Card is now a simple block element */
+.case-card {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.case-details {
+    width: 100%;
+}
+
+.case-card h3 {
+    margin: 0 0 1rem 0;
+    color: #34495E;
+}
+
+.case-card p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    color: #34495E;
+}
+.case-card p strong {
+    color: #5D6D7E;
+    font-weight: 600;
+}
+
+.empty-state {
+    text-align: center;
+    color: #5D6D7E;
+    font-style: italic;
+}
+
+/* THE FIX: Styles for the new "View Proof" button */
+.btn-proof {
+    background-color: transparent;
+    color: #6A9BC3;
+    border: 1px solid #c9d6e3;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+.btn-proof:hover {
+    background-color: #f0f4f8;
+    color: #3A4D6F;
+}
+.btn-proof i {
+    margin-right: 8px;
+}
+
+/* THE FIX: Styles for the new image viewer modal */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    max-width: 80vw;
+    width: auto;
+    padding: 1rem;
+    max-height: 90vh;
+    position: relative;
+}
+.modal-content.animated {
+    animation: fadeIn 0.3s ease-out;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem 1rem;
+}
+.modal-header h2 {
+    margin: 0;
+    color: #34495E;
+    font-size: 1.25rem;
+}
+.close-btn {
+    background: none; border: none; font-size: 2rem;
+    color: #788A9C; cursor: pointer;
+}
+.modal-body {
+    max-height: 80vh;
+    overflow: hidden;
+}
+.proof-image-full {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

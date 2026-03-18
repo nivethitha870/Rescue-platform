@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ getRoleContent().roleText }} Sign In - StrayRescue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="signin-container">
+        <header class="page-header">
+            <a href="#" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle">
+                    <i class="fas fa-users"></i> {{ getRoleContent().roleText }} <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" (click)="changeRole('volunteer')">Volunteer</a>
+                    <a class="dropdown-item" (click)="changeRole('admin')">Admin</a>
+                    <a class="dropdown-item" (click)="changeRole('user')">User</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="form-wrapper">
+            <div class="form-box">
+                <h2>{{ getRoleContent().title }}</h2>
+                <p class="subtitle">{{ getRoleContent().subtitle }}</p>
+
+                <!-- Bind form to FormGroup and handle submission -->
+                <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" novalidate>
+                    <!-- Email Input -->
+                    <div class="input-group">
+                        <label for="email">Email or Mobile Number</label>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="e.g., test@gmail.com" formControlName="email">
+                        </div>
+                        <div *ngIf="signinForm.get('email')?.invalid && signinForm.get('email')?.touched" class="error-message">
+                            <div *ngIf="signinForm.get('email')?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="signinForm.get('email')?.errors?.['email']">Please enter a valid email.</div>
+                        </div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Enter your password" formControlName="password">
+                            <button type="button" class="password-toggle"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div *ngIf="signinForm.get('password')?.invalid && signinForm.get('password')?.touched" class="error-message">
+                            <div *ngIf="signinForm.get('password')?.errors?.['required']">Password is required.</div>
+                        </div>
+                    </div>
+
+                    <a [routerLink]="['/forgot-password']" class="forgot-password">Forgot Password?</a>
+
+                    <!-- Display server-side error messages -->
+                    <div *ngIf="errorMessage" class="error-message server-error">
+                        {{ errorMessage }}
+                    </div>
+
+                    <!-- Disable button when form is invalid -->
+                    <button type="submit" class="btn-primary" [disabled]="signinForm.invalid">{{ getRoleContent().buttonText }}</button>
+
+                    <p class="signup-link">
+                        Don't have an account? <a [routerLink]="['/register', selectedRole]">Sign up here</a>
+                    </p>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

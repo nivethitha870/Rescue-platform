@@ -1,0 +1,96 @@
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #3A4D6F;
+}
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #3A4D6F;
+    border-left: 4px solid #6A9BC3;
+    padding-left: 1rem;
+}
+
+/* Base card style */
+.card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Map & Stats */
+.map-container { margin-bottom: 2.5rem; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+.stat-card { text-align: center; padding: 2rem; }
+.stat-number { font-size: 3rem; font-weight: 700; color: #6A9BC3; line-height: 1; }
+.stat-label { font-size: 1rem; color: #788A9C; margin-top: 0.5rem; }
+
+/* Case Lists */
+.case-section { margin-bottom: 2rem; }
+.case-card { margin-bottom: 1rem; }
+.case-card h3 { margin: 0 0 0.75rem 0; color: #3A4D6F; }
+.case-card .case-type { color: #6A9BC3; font-weight: 500; }
+.case-card p { margin: 0.5rem 0; font-size: 0.9rem; color: #3A4D6F; }
+.case-card p strong { color: #788A9C; }
+.empty-state { text-align: center; color: #788A9C; font-style: italic; padding: 2rem; }
+
+/* Buttons */
+.btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease-in-out; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-resolve { background-color: #28a745; color: white; }
+.btn-resolve:hover { background-color: #218838; }
+.btn-accept { background-color: #6A9BC3; color: white; }
+.btn-accept:hover { background-color: #557ea2; }
+.btn-decline { background-color: #f0f4f8; color: #788A9C; }
+.btn-decline:hover { background-color: #dc3545; color: white; }
+.btn-secondary { background-color: transparent; color: #788A9C; border: 1px solid #c9d6e3; }
+.btn-secondary:hover { background-color: #f0f4f8; color: #3A4D6F; }
+.btn i { margin-right: 8px; }
+
+
+image-viewer {
+  max-width: 80vw; /* Use viewport width for larger images */
+  width: auto;
+  padding: 1rem;
+}
+
+.image-viewer .modal-body {
+  padding: 0;
+  max-height: 80vh; /* Use viewport height */
+  overflow: hidden;
+}
+
+.case-image-full {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain; /* Ensure the whole image is visible */
+  border-radius: 8px;
+}
+/* Action Button Layout */
+.modal-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
+.case-card .modal-actions { justify-content: space-between; align-items: center; }
+.accept-decline-group { display: flex; gap: 0.75rem; }
+
+/* Expandable Map Container */
+.map-view-container { margin-top: 1.5rem; animation: fadeIn 0.4s ease-out; }
+
+/* Modal Styles */
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { width: 90%; max-width: 500px; position: relative; }
+.modal-content.animated { animation: fadeIn 0.3s ease-out; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.modal-header h2 { margin: 0; border: none; padding: 0; }
+.modal-header .fa-bell { margin-right: 10px; color: #ffc107; }
+.close-btn { position: absolute; top: 0; right: 0; background: none; border: none; font-size: 2rem; color: #788A9C; cursor: pointer; padding: 0.5rem; }
+.modal-body p { color: #788A9C; margin-bottom: 1.5rem; }
+.case-details { background-color: rgba(200, 224, 240, 0.2); padding: 1rem; border-radius: 8px; font-size: 0.9rem; }
+.case-details div { margin-bottom: 0.5rem; }
+.modal-map-container { margin-bottom: 1.5rem; height: 250px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }

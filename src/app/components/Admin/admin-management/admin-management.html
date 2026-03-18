@@ -1,0 +1,66 @@
+<div class="management-container">
+  <h1>Case Management</h1>
+  <p>A master list of all cases reported on the platform.</p>
+
+  <div class="table-container card">
+    <table>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Animal</th>
+          <th>Reported By</th>
+          <th>Assigned To</th>
+          <th>Date Reported</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let case of allCases">
+          <td><span class="status-badge" [ngClass]="case.status.toLowerCase().replace(' ', '-')">{{ case.status }}</span></td>
+          <td>{{ case.animal }} - {{ case.caseType }}</td>
+          <td>{{ case.reportedBy?.fullName || 'N/A' }}</td>
+          <td>{{ case.assignedTo?.fullName || 'Unassigned' }}</td>
+          <td>{{ case.createdAt | date:'short' }}</td>
+          <td>
+            <!-- THE FIX: This button now opens the modal -->
+            <button class="btn-action" (click)="openDetailsModal(case)">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- THE FIX: New Modal for Viewing Case Details -->
+<div class="modal-overlay" *ngIf="isDetailsModalVisible" (click)="closeDetailsModal()">
+  <div class="modal-content card animated" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Case Details</h2>
+      <button class="close-btn" (click)="closeDetailsModal()">&times;</button>
+    </div>
+    <div class="modal-body" *ngIf="selectedCase">
+      <!-- Reported Image -->
+      <div class="image-section">
+        <h3>Reported Image</h3>
+        <img [src]="selectedCase.imageBase64" alt="Image of the reported case">
+      </div>
+
+      <!-- Proof Image (only shown if the case is Resolved) -->
+      <div class="image-section" *ngIf="selectedCase.status === 'Resolved' && selectedCase.resolutionProofUrl">
+        <h3>Resolution Proof</h3>
+        <img [src]="selectedCase.resolutionProofUrl" alt="Image of the resolution proof">
+      </div>
+      
+      <!-- Show a message if the case is resolved but no proof was uploaded -->
+      <div *ngIf="selectedCase.status === 'Resolved' && !selectedCase.resolutionProofUrl">
+        <p>This case was marked as resolved, but no proof image was provided.</p>
+      </div>
+
+      <!-- Resolution Time (only shown if resolved) -->
+      <div class="details-section" *ngIf="selectedCase.resolvedAt">
+        <h3>Timeline</h3>
+        <p><strong>Resolved At:</strong> {{ selectedCase.resolvedAt | date:'medium' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

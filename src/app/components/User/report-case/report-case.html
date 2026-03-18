@@ -1,0 +1,52 @@
+<div class="report-case-container">
+  <h1>Report a New Case</h1>
+  <p>Fill out the details below to alert our volunteers.</p>
+
+  <form class="report-form" [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+    <!-- Case Type -->
+    <div class="form-group">
+      <label for="caseType">Case Type</label>
+      <select id="caseType" formControlName="caseType">
+        <option value="" disabled>Select a type...</option>
+        <option value="Injured">Injured</option>
+        <option value="Stuck">Stuck</option>
+        <option value="Abandoned">Abandoned</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- Animal -->
+    <div class="form-group">
+      <label for="animal">Animal</label>
+      <select id="animal" formControlName="animal">
+        <option value="" disabled>Select an animal...</option>
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+        <option value="Bird">Bird</option>
+        <option value="Cow">Cow</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Upload Photo</label>
+      <app-image-uploader (imageSelected)="onImageUploaded($event)"></app-image-uploader>
+    </div>
+
+    <!-- Location -->
+    <!-- Map Selector -->
+    <div class="form-group">
+      <label>Pinpoint Location</label>
+      <app-map-selector (locationSelected)="onLocationSelected($event)"></app-map-selector>
+    </div>
+
+    <!-- Display dynamic success or error messages -->
+    <div *ngIf="successMessage" class="message success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="message error">{{ errorMessage }}</div>
+
+    <!-- 1. THE FIX: Update the button's state and text dynamically -->
+    <button type="submit" [disabled]="reportForm.invalid || isSubmitting">
+      {{ isSubmitting ? 'Submitting...' : 'Submit Report' }}
+    </button>
+  </form>
+</div>

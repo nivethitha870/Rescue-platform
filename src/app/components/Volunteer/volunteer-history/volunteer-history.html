@@ -1,0 +1,35 @@
+<div class="history-container">
+  <h1>Your Rescue History</h1>
+  <p>A record of all the cases you have successfully resolved. Thank you for your service!</p>
+
+  <!-- Check if there are any cases in the history array -->
+  <div *ngIf="history.length > 0; else noHistory">
+    <!-- Loop through each resolved case and display it as a card -->
+    <div class="case-card" *ngFor="let case of history">
+      <div class="case-image">
+        <!-- Display the proof of completion image -->
+        <img [src]="case.resolutionProofUrl" alt="Proof of rescue for {{ case.animal }}">
+      </div>
+      <div class="case-details">
+        <h3>{{ case.animal }} - <span class="case-type">{{ case.caseType }}</span></h3>
+        <p>
+          <strong>Resolved On:</strong> {{ case.resolvedAt | date: 'fullDate' }} at {{ case.resolvedAt | date: 'shortTime' }}
+        </p>
+        <p>
+          <strong>Initially Reported:</strong> {{ case.createdAt | date: 'medium' }}
+        </p>
+        <p>
+          <strong>Location:</strong> {{ case.address }}
+        </p>
+        <a [href]="case.resolutionProofUrl" target="_blank" class="proof-link">View Full Proof</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- This template is shown if the history array is empty -->
+  <ng-template #noHistory>
+    <div class="no-history-card">
+      <p>You haven't resolved any cases yet. Check the dashboard for available rescues!</p>
+    </div>
+  </ng-template>
+</div>

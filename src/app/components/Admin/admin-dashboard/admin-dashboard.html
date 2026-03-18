@@ -1,0 +1,29 @@
+<div class="dashboard-container">
+  <h1>Analytics & Reports</h1>
+
+  <div class="grid-layout">
+    <!-- NEW: Average Resolution Time Card -->
+    <div class="card stat-card">
+        <h2>Avg. Resolution Time</h2>
+        <div class="stat-value">{{ averageResolutionTime }}</div>
+    </div>
+
+    <!-- Case Status Chart -->
+    <div class="card chart-card">
+      <h2>Cases by Status</h2>
+      <canvas baseChart [data]="statusChartData" [type]="statusChartType" [options]="chartOptions"></canvas>
+    </div>
+
+    <!-- Hotspot Map -->
+    <div class="card map-card-full">
+      <h2>Rescue Hotspots</h2>
+      <app-case-map [cases]="hotspotCases"></app-case-map>
+    </div>
+
+    <!-- Volunteer Performance Chart -->
+    <div class="card chart-card-full">
+      <h2>Volunteer Performance (Top Responders)</h2>
+      <canvas baseChart [data]="volunteerChartData" [type]="volunteerChartType" [options]="chartOptions"></canvas>
+    </div>
+  </div>
+</div>

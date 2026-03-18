@@ -1,0 +1,45 @@
+<div class="history-container">
+  <h1>Your Case History</h1>
+  <p>Here are the details of your resolved cases.</p>
+
+  <div *ngIf="resolvedCases.length > 0; else noHistory">
+    <!-- THE FIX: The card layout is simplified -->
+    <div class="case-card card" *ngFor="let case of resolvedCases">
+      <div class="case-details">
+        <h3>{{ case.animal }} - {{ case.caseType }}</h3>
+        
+        <p><strong>Location:</strong> {{ case.address }}</p>
+        <p><strong>Reported:</strong> {{ case.createdAt | date: 'medium' }}</p>
+        <p><strong>Resolved:</strong> {{ (case.resolvedAt || case.updatedAt) | date: 'medium' }}</p>
+
+        <!-- THE FIX: Add a "View Proof" button, only if proof exists -->
+        <button 
+          *ngIf="case.resolutionProofUrl" 
+          class="btn-proof" 
+          (click)="openProofModal(case)">
+          <i class="fas fa-image"></i> View Resolution Proof
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noHistory>
+    <div class="card empty-state">
+      <p>You have no resolved cases in your history yet.</p>
+    </div>
+  </ng-template>
+</div>
+
+
+<!-- THE FIX: New Modal for Viewing the Proof Image -->
+<div class="modal-overlay" *ngIf="isProofModalVisible" (click)="closeProofModal()">
+  <div class="modal-content card animated" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ proofCaseDetails }}</h2>
+      <button class="close-btn" (click)="closeProofModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <img [src]="proofImageToShow" alt="Resolution Proof Image" class="proof-image-full">
+    </div>
+  </div>
+</div>

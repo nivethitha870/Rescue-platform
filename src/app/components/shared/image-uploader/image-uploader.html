@@ -1,0 +1,35 @@
+<div class="uploader-container">
+  <!-- This is the drop zone, which is also a label for the hidden file input -->
+  <label 
+    class="drop-zone" 
+    (dragover)="onDragOver($event)" 
+    (dragleave)="onDragLeave($event)" 
+    (drop)="onDrop($event)"
+    [class.dragging]="isDragging">
+    
+    <!-- This input is hidden but is used for the "Upload from Files" functionality -->
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+
+    <!-- Show the preview image if one has been selected -->
+    <div *ngIf="previewUrl" class="preview-container">
+      <img [src]="previewUrl" alt="Image preview">
+    </div>
+
+    <!-- Show the instructional text if no image is selected yet -->
+    <div *ngIf="!previewUrl" class="placeholder-text">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p>Drag & drop an image here, or click to upload.</p>
+    </div>
+  </label>
+
+  <!-- Buttons for additional actions -->
+  <div class="button-group">
+    <label class="btn btn-secondary">
+      <i class="fas fa-file-upload"></i> Upload from Files
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+    </label>
+    <button type="button" class="btn btn-secondary" (click)="onTakePhoto()">
+      <i class="fas fa-camera"></i> Take a Photo
+    </button>
+  </div>
+</div>

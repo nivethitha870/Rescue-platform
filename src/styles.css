@@ -1,0 +1,52 @@
+/* =================================
+   NEW: Custom Leaflet DivIcon Marker Styles
+   ================================= */
+
+/* Base style for all our custom markers */
+.leaflet-div-icon {
+    background-clip: padding-box;
+    border-radius: 50%; /* Makes it a circle */
+}
+
+/* Marker for a Reported Case (Red) */
+.case-marker-icon {
+    background-color: #E53E3E; /* A strong red */
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Marker for a Volunteer's Location (Blue with Pulse) */
+.volunteer-marker-icon {
+    background-color: #3f8ff0; /* A friendly blue */
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    /* Pulsing animation to indicate 'you are here' */
+    animation: pulse 2s infinite;
+}
+
+/* Marker for a Vet/Shelter Facility (Green) */
+.facility-marker-icon {
+    background-color: #28a745; /* A clear green */
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Marker for selecting a location (Theme Orange) */
+.selection-marker-icon {
+    background-color: #FF7B54; /* The primary orange from your light theme */
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Pulse animation keyframes */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(63, 143, 240, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(63, 143, 240, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(63, 143, 240, 0);
+    }
+}

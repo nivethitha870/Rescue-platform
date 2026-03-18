@@ -1,0 +1,17 @@
+<div class="layout-container">
+  <aside class="sidebar">
+    <div class="logo">StrayRescue</div>
+    <nav class="menu">
+      <a routerLink="/volunteer/dashboard" routerLinkActive="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a routerLink="/volunteer/history" routerLinkActive="active"><i class="fas fa-history"></i> History</a>
+      <a routerLink="/volunteer/profile" routerLinkActive="active"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="logout-section">
+      <button (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

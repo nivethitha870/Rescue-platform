@@ -1,0 +1,112 @@
+/* =================================
+   1. Main Uploader Container
+   ================================= */
+.uploader-container {
+    width: 100%;
+}
+
+/* =================================
+   2. The Drop Zone (Glassmorphism)
+   ================================= */
+.drop-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+    
+    /* The Frosted Glass Effect */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    border: 2px dashed rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    
+    cursor: pointer;
+    margin-bottom: 1rem;
+    overflow: hidden; /* Ensures the preview image fits within the rounded corners */
+    transition: all 0.3s ease;
+}
+
+/* Hover and Dragging States */
+.drop-zone:hover,
+.drop-zone.dragging {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: #ffffff;
+    border-style: solid;
+    transform: scale(1.02); /* Subtle grow effect */
+}
+
+/* Hide the actual file input element */
+.file-input {
+    display: none;
+}
+
+/* =================================
+   3. Content Inside the Drop Zone
+   ================================= */
+.preview-container {
+    width: 100%;
+    height: 100%;
+    padding: 8px; /* Add a small padding around the preview */
+}
+
+.preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Shows the whole image without cropping */
+    border-radius: 12px; /* Slightly rounded corners for the image itself */
+}
+
+.placeholder-text {
+    text-align: center;
+    color: #34495E; /* A universal, readable dark text color */
+    font-weight: 500;
+}
+
+.placeholder-text i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+/* =================================
+   4. Action Buttons
+   ================================= */
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    color: #34495E; /* Dark, readable text */
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn i {
+    margin-right: 8px;
+}

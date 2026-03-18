@@ -1,0 +1,50 @@
+.dashboard-container h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c5f7c;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.25rem;
+    color: #2c5f7c;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.map-card-full,
+.chart-card-full {
+    grid-column: 1 / -1;
+}
+
+/* Stat Card specific styles */
+.stat-card { text-align: center; padding: 2rem; }
+.stat-card h2 { text-align: center; font-size: 1.1rem; color: #5a7c8f; }
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #82cde0;
+    margin-top: 1rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    max-height: 400px;
+    width: 100% !important;
+}

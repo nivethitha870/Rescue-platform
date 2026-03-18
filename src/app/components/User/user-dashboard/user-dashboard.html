@@ -1,0 +1,39 @@
+<div class="dashboard-container">
+  <h1>Your Dashboard</h1>
+  
+  <!-- Stat Cards -->
+  <div class="stats-grid">
+    <div class="stat-card card">
+      <h2>{{ totalCasesReported }}</h2>
+      <p>Total Cases Reported</p>
+    </div>
+    <div class="stat-card card">
+      <!-- THE FIX: The count now comes from the length of the array -->
+      <h2>{{ ongoingCases.length }}</h2>
+      <p>Ongoing Cases</p>
+    </div>
+  </div>
+
+  <!-- THE FIX: Renamed section to reflect multiple cases -->
+  <div class="ongoing-cases-section">
+    <h2>Ongoing Case Status</h2>
+    
+    <!-- Use *ngIf to check if the array has items -->
+    <div *ngIf="ongoingCases.length > 0; else noOngoingCases">
+      <!-- Use *ngFor to loop through the array and create a card for each case -->
+      <div class="case-details card" *ngFor="let case of ongoingCases">
+        <p><strong>Animal:</strong> {{ case.animal }}</p>
+        <p><strong>Type:</strong> {{ case.caseType }}</p>
+        <p><strong>Reported On:</strong> {{ case.createdAt | date: 'medium' }}</p>
+        <p><strong>Current Status:</strong> <span class="status-badge">{{ case.status }}</span></p>
+      </div>
+    </div>
+    
+    <!-- This template is shown if the ongoingCases array is empty -->
+    <ng-template #noOngoingCases>
+      <div class="card empty-state">
+        <p>You have no active ongoing cases. Great job!</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
